@@ -1,0 +1,106 @@
+1) Quantas vezes Natalie Portman foi indicada ao Oscar? 
+R: 3
+select  count(*) from filmes where nome_do_indicado like "%Natalie Portman%";
+    para contar quantas vezes a Natlie portman foi indicada ao Oscar iniciei utilizando o 'SELECT COUNT(*)', para selecionar e contar os registros que atendem às condições, em seguida usei 'FROM filmes' que especifica a tabela na qual a consulta será executada e por fim 'WHERE nome_do_indicado like '%Natalie Portman%': Esta é a cláusula WHERE, que filtra os registros da tabela "filmes". Ela especifica que estamos interessados apenas nos registros em que a coluna "nome_do_indicado" contenha a sequência de caracteres "Natalie Portman". O operador "LIKE" é usado com o caractere "%" antes e depois do nome "Natalie Portman" para encontrar correspondências parciais, ou seja, registros nos quais o nome "Natalie Portman" aparece em qualquer lugar do campo.
+
+
+2) Quantos Oscars Natalie Portman ganhou? 
+R: 1
+select count(*) from filmes where nome_do_indicado like "%Natalie Portman%" and vencedor = "sim";
+    Comecei com "SELECT COUNT(*)", que é responsável por selecionar e contar os registros que atendem às condições da consulta. Em seguida, utilizei "FROM filmes" para especificar a tabela na qual a consulta será executada, que é a tabela "filmes" contendo informações sobre indicações e vencedores do Oscar. Na cláusula "WHERE nome_do_indicado like '%Natalie Portman%' and vencedor = 'sim'", filtrei os registros da tabela "filmes". Isso especifica que estamos interessados apenas nos registros em que o campo "nome_do_indicado" contenha a sequência de caracteres "Natalie Portman" e em que o campo "vencedor" seja igual a "sim".
+
+
+3) Amy Adams já ganhou algum Oscar? 
+R: não
+select * from filmes where nome_do_indicado like "%Amy Adams%" and vencedor = "sim";
+    Comecei com "SELECT *", que é responsável por selecionar todos os campos que atendem às condições da consulta. Diferentemente da consulta anterior, estamos interessados em visualizar os registros completos em vez de contar. Em seguida, utilizei "FROM filmes" para especificar a tabela na qual a consulta será executada, que é a tabela "filmes" contendo informações sobre indicações e vencedores do Oscar. Na cláusula "WHERE nome_do_indicado like '%Amy Adams%' and vencedor = 'sim'", filtrei os registros da tabela "filmes". Isso especifica que estamos interessados apenas nos registros em que o campo "nome_do_indicado" contenha a sequência de caracteres "Amy Adams" e em que o campo "vencedor" seja igual a "sim."
+
+
+4) A série de filmes Toy Story ganhou um Oscar em quais anos? 
+R: 2011, 2011, 2020
+select * from filmes where nome_filme like "%Toy Story%" and ano_cerimonia and vencedor = "sim";
+    Comecei com "SELECT *", que é responsável por selecionar todos os campos (registros completos) que atendem às condições da consulta. Dessa forma, podemos visualizar todos os detalhes dos registros onde "Toy Story" foi vencedor do Oscar. Em seguida, utilizei "FROM filmes" para especificar a tabela na qual a consulta será executada, que é a tabela "filmes" contendo informações sobre indicações e vencedores do Oscar. Na cláusula "WHERE nome_filme like '%Toy Story%' and vencedor = 'sim'", filtrei os registros da tabela "filmes". Isso especifica que estamos interessados apenas nos registros em que o campo "nome_filme" contenha a sequência de caracteres "Toy Story" e em que o campo "vencedor" seja igual a "sim."
+
+
+5) A partir de que ano que a categoria "Actress" deixa de existir? 
+R: 2020
+select * from filmes where categoria like "%Actress%" order by ano_cerimonia DESC;
+    Comecei com "SELECT *", que seleciona todos os campos que atendem às condições da consulta para que possamos visualizar todos os detalhes dos registros. Em seguida, utilizei "FROM filmes" para especificar a tabela "filmes" onde a consulta será realizada, pois é nessa tabela que estão registradas as informações sobre as cerimônias do Oscar. Na cláusula "WHERE categoria like '%Actress%'", filtrei os registros para que incluíssem apenas aqueles em que a categoria contém a sequência de caracteres "Actress". Isso nos permite focar na categoria de atriz. Por fim, adicionei "order by ano_cerimonia DESC" para ordenar os resultados em ordem decrescente com base no ano da cerimônia do Oscar, o que significa que a cerimônia mais recente aparecerá no topo dos resultados.
+
+
+6) O primeiro Oscar para melhor Atriz foi para quem? Em que ano?
+R: 1928, louise dresser 
+select * from filmes where categoria like "%Actress%" order by ano_cerimonia;
+    "SELECT *": Seleciona todos os campos (registros completos) que atendem às condições da consulta para visualizar todos os detalhes dos registros.
+    "FROM filmes": Especifica a tabela "filmes" onde a consulta será realizada, que contém informações sobre as cerimônias do Oscar.
+    "WHERE categoria like '%Actress%'": Filtra os registros para incluir apenas aqueles em que a categoria contém a sequência de caracteres "Actress", permitindo que nos concentremos na categoria de Melhor Atriz. 
+    "ORDER BY ano_cerimonia": Ordena os resultados em ordem crescente com base no ano da cerimônia do Oscar, para que possamos ver os registros em ordem cronológica.
+
+
+7) Na coluna/campo "Vencedor", altere todos os valores com "Sim" para 1 e todos os valores "Não" para 0.
+UPDATE filmes
+SET Vencedor = CASE
+    WHEN vencedor = 'Sim' THEN '1'
+    when vencedor = 'Não' THEN 0
+    else vencedor
+end;
+    Usei a instrução "UPDATE" para atualizar os registros na tabela "filmes". Em "SET Vencedor =", estabeleci que estou atualizando a coluna "Vencedor". Em seguida, utilizei uma declaração "CASE" para criar uma lógica condicional que irá atualizar os valores. O "CASE" permite que você avalie várias condições e aplique diferentes ações com base nessas condições. Quando a condição é "WHEN vencedor = 'Sim'", isso significa que, se o valor atual na coluna "Vencedor" for igual a 'Sim', ele será atualizado para '1'. Quando a condição é "WHEN vencedor = 'Não'", se o valor atual na coluna "Vencedor" for igual a 'Não', ele será atualizado para 0. Usei "ELSE vencedor" para lidar com qualquer outro valor na coluna "Vencedor" que não corresponda às condições anteriores. Isso garante que outros valores permaneçam inalterados.
+
+
+8) Em qual edição do Oscar "Crash" ganhou o prêmio principal? 
+R: Edição 78
+select * from filmes where nome_filme like "%Crash%" and vencedor = "sim";
+    Usei a instrução "SELECT" para selecionar informações da tabela "filmes".  Utilizei a cláusula "FROM" para especificar a tabela na qual a consulta será executada, que é a tabela "filmes" contendo informações sobre as cerimônias do Oscar e os vencedores. Na cláusula "WHERE nome_filme like '%Crash%' and vencedor = 'sim'", filtrei os registros para incluir apenas aqueles em que o campo "nome_filme" contenha a sequência de caracteres "Crash" e em que o campo "vencedor" seja igual a "sim." Isso garante que estamos procurando o filme "Crash" que foi um vencedor do Oscar.
+
+
+9) Bom... dê um Oscar para um filme que merece muito, mas não ganhou. 
+R: The pianist - cinematography
+UPDATE filmes
+SET vencedor = 'sim'
+WHERE id_filme = 8262;
+    Utilizei a instrução "UPDATE" para atualizar os registros na tabela "filmes". Em "SET vencedor = 'sim'", estabeleci que estou atualizando a coluna "vencedor" para o valor 'sim', indicando que o filme merece ganhar um Oscar. Na cláusula "WHERE id_filme = 8262", especifiquei que desejo atualizar apenas o registro com o ID específico 8262. Esse é o registro do filme "The Pianist" na categoria "cinematography."
+
+
+10) O film Central do Brasil aparece no Oscar?
+R: Não
+select * from filmes where nome_filme like "%central do brasil%";
+    Usei a instrução "SELECT" para selecionar informações da tabela "filmes". Na cláusula "FROM filmes", especifiquei a tabela na qual a consulta será executada, que é a tabela "filmes" contendo informações sobre cerimônias do Oscar e vencedores. Na cláusula "WHERE nome_filme like '%Central do Brasil%'", filtrei os registros para incluir apenas aqueles em que o campo "nome_filme" contém a sequência de caracteres "Central do Brasil". Isso permite que verifiquemos se há registros relacionados ao filme "Central do Brasil" nos dados do Oscar.
+
+
+11) Inclua no banco 3 filmes que nunca foram nem nomeados ao Oscar, mas que merecem ser. 
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2013', '2024', '94', 'melhor filme', 'Paulo Gustavo', 'Minha mãe é uma peça', 'sim')
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2004', '2024', '94', 'melhor filme', 'Terry Crews', 'White Chicks', 'sim')
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2014', '2024', '94', 'melhor filme', 'Lily Collins', 'Love, Rosie ', 'sim')
+    Usei a instrução "INSERT INTO" para adicionar um novo registro à tabela "filmes" no banco de dados. Especifiquei os valores que serão inseridos na tabela e em quais colunas em Values 
+
+12) Pensando no ano em que você nasceu: Qual foi o Oscar de melhor filme, Melhor Atriz e Melhor Diretor?
+R: Chicago ,Nicole Kidman, Roman Polanski
+select * from filmes where ano_cerimonia = '2003' and vencedor = 'sim';
+    Usei a instrução "SELECT" para selecionar informações da tabela "filmes". Na cláusula "FROM filmes", especifiquei a tabela na qual a consulta será executada, que é a tabela "filmes" contendo informações sobre as cerimônias do Oscar e os vencedores. Em "WHERE ano_cerimonia = '2003'", filtrei os registros para incluir apenas aqueles em que o campo "ano_cerimonia" é igual a '2003', que é o ano em questão. Na mesma cláusula "WHERE", também filtrei os registros para incluir apenas aqueles em que o campo "vencedor" é igual a 'sim', indicando que estamos interessados nos vencedores do Oscar.
+
+
+13) Agora procure 7 atrizes que não sejam americanas, europeias ou brasileiras.  Vamos cadastrá-los no nosso banco com o prêmio que você quiser. 
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2017', '2024', '94', 'Actress', 'Valentina Zenere', 'Las chicas del cable', 'sim')
+
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2019', '2024', '94', 'Actress', 'Natalia Coronado', 'Procura-se um pai', 'sim')
+
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2022', '2024', '94', 'Actress', 'Aishwarya Rai', 'ponniyin selvan: ii', 'sim')
+
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2020', '2024', '94', 'Actress', 'Rachel Saanchita', 'Uma Skatista Radical', 'sim')
+
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2017', '2024', '94', 'Actress', 'Sheila Munyiva', 'Rafiki', 'sim')
+
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2021', '2024', '94', 'Actress', 'Park Eun-bin', 'Uma Advogada Extraordinária', 'sim')
+
+INSERT INTO filmes ( ano_filmagem, ano_cerimonia, edicao_cerimonia, categoria, nome_do_indicado, nome_filme, vencedor)
+VALUES ('2016', '2024', '94', 'Actress', 'Helana Sawires', 'O casamento de eli', 'sim')
+    Usei a instrução "INSERT INTO" para adicionar um novo registro à tabela "filmes" no banco de dados. Especifiquei os valores que serão inseridos na tabela e em quais colunas em Values 
