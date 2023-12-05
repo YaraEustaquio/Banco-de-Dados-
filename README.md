@@ -2,6 +2,14 @@ A imagem apresenta o Modelo Entidade-Relacionamento de um sistema hospitalar. Es
 
 ![image](https://github.com/YaraEustaquio/Banco-de-Dados-/assets/51837067/85b6ed47-b04c-4b27-8760-5cb23d696481)
 
+No modelo conceitual abaixo foi acrescentado a área de internação do hospital  
+![image](https://github.com/YaraEustaquio/Banco-de-Dados-/assets/51837067/32e16ec8-21b4-42b5-adea-6272b32faf3e)
+
+Parte 2 - Modelo lógico 
+![image](https://github.com/YaraEustaquio/Banco-de-Dados-/assets/51837067/bb8d592d-dca2-4686-8319-dee679ee698c)
+
+
+
 
 
 
